@@ -58,7 +58,13 @@ class ProxyDumper implements DumperInterface
      */
     public function isProxyCandidate(Definition $definition)
     {
-        return $definition->isLazy() && ($class = $definition->getClass()) && class_exists($class);
+        return
+            $definition->isLazy()
+            && ($class = $definition->getClass())
+            && (
+                class_exists($class)
+                || interface_exists($class)
+            );
     }
 
     /**
